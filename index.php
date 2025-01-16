@@ -22,7 +22,8 @@ if ($_COOKIE['sessionId']) {
     $id = session_create_id();
     setcookie('sessionId', $id);
     $servers[] = $instance_id;
-    $r->set($_COOKIE['sessionId'], serialize($servers));
+    var_dump(serialize($servers));
+    $r->set($id, serialize($servers));
 }
 
 ?>
