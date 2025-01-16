@@ -14,6 +14,7 @@ $instance_id = file_get_contents($url);
 //    'database' => 0,
 //]);
 if ($_COOKIE['sessionId']) {
+    $id = $_COOKIE['sessionId'];
 //    $servers = unserialize($r->get($_COOKIE['sessionId']));
     $servers[] = $instance_id;
 } else {
@@ -33,7 +34,7 @@ if ($_COOKIE['sessionId']) {
     <div class="content">
         <h1>Redis Test</h1>
         <p><span class="attribute-name">Instance ID:</span><code><?php echo $instance_id; ?></code></p>
-        <p><span >Your session id is: <?= $_COOKIE['sessionId'] ?></span></p>
+        <p><span >Your session id is: <?= $id ?></span></p>
         <p><?php var_dump($servers)?></p>
     </div>
 
