@@ -1,0 +1,36 @@
+<?php
+
+$url = "http://169.254.169.254/latest/meta-data/instance-id";
+$instance_id = file_get_contents($url);
+
+use Predis\Client as PredisClient;
+
+$r = new PredisClient([
+    'scheme'   => 'tcp',
+    'host'     => 'sample.15p8r0.clustercfg.use2.cache.amazonaws.com',
+    'port'     => 6379,
+    'password' => '',
+    'database' => 0,
+]);
+if ($_COOKIE['sessionId']) {
+    $servers = unserialize($r->get($_COOKIE['sessionId']));
+    $servers[] = $instance_id;
+} else {
+    $id = session_create_id();
+    setcookie('sessionId', $id);
+    $servers[] = $instance_id;
+    $r->set($_COOKIE['sessionId'], serialize($servers));
+}
+
+?>
+
+<body>
+<div class="container">
+    <div class="content">
+        <h1>Redis Test</h1>
+        <p><span class="attribute-name">Instance ID:</span><code><?php echo $instance_id; ?></code></p>
+        <p><span >Your session id is: <?= $_COOKIE['sessionId'] ?></span></p>
+        <p><?php var_dump($servers)?></p>
+    </div>
+
+</div>
