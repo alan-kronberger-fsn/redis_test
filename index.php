@@ -24,6 +24,9 @@ if ($_COOKIE['sessionId']) {
 
 ?>
 
+<!DOCTYPE html>
+<html>
+
 <body>
 <div class="container">
     <div class="content">
@@ -34,3 +37,6 @@ if ($_COOKIE['sessionId']) {
     </div>
 
 </div>
+
+</body>
+</html>
