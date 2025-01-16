@@ -1,11 +1,10 @@
 <?php
-
-require 'vendor/autoload.php';
-
+require_once "vendor/autoload.php";
 use Predis\Client as PredisClient;
-
 $url = "http://169.254.169.254/latest/meta-data/instance-id";
 $instance_id = file_get_contents($url);
+
+
 
 $r = new PredisClient([
     'scheme'   => 'tcp',
