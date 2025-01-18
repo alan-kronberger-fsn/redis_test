@@ -16,14 +16,13 @@ $r = new PredisClient([
 ]);
 if ($_COOKIE['sessionId']) {
     $id = $_COOKIE['sessionId'];
-    $servers = explode(",", $r->get($id));
-    $servers[] = $instance_id;
-    $r->set($id, implode(",",$servers));
+    $r->append($id, ",{$instance_id}");
+    $servers = $r->get($id);
 } else {
     $id = session_create_id();
     setcookie('sessionId', $id);
-    $servers[] = $instance_id;
-    $r->set($id, implode(",",$servers));
+    $r->set($id, $instance_id);
+    $servers = $r->get($id);
 }
 
 ?>
