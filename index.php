@@ -15,20 +15,19 @@ $instance_id = file_get_contents($url);
 
 
 
-$r = new PredisClient([
-    'scheme'   => 'tcp',
-    'host'     => 'sample.15p8r0.clustercfg.use2.cache.amazonaws.com',
-    'port'     => 6379
-]);
+$r = new PredisClient(
+        ['tcp://sample.15p8r0.clustercfg.use2.cache.amazonaws.com:6379'],
+        ['cluster' => 'redis'],
+);
 if ($_COOKIE['sessionId']) {
     $id = $_COOKIE['sessionId'];
     $r->append($id, ",{$instance_id}");
-    $servers = $r->get($id);
+    $servers = explode(",",$r->get($id));
 } else {
     $id = session_create_id();
     setcookie('sessionId', $id);
     $r->set($id, $instance_id);
-    $servers = $r->get($id);
+    $servers = explode(",",$r->get($id));
 }
 
 ?>
