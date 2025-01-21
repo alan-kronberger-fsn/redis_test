@@ -16,7 +16,7 @@ $instance_id = file_get_contents($url);
 
 
 $r = new PredisClient(
-        ['tcp://sample.15p8r0.clustercfg.use2.cache.amazonaws.com:6379'],
+        ['tcp://redis-ags-cluster.15p8r0.clustercfg.use2.cache.amazonaws.com:6379'],
         ['cluster' => 'redis'],
 );
 if (isset($_COOKIE['sessionId'])) {
