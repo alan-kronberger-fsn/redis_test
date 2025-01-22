@@ -27,7 +27,7 @@ $_SESSION['instances'][] = $instance_id;
         <p><span >Your session id is: <?= session_id() ?></span></p>
         <p><?php var_dump($_SESSION['instances'])?></p>
     </div>
-
+        <?= phpinfo() ?>
 </div>
 
 </body>
